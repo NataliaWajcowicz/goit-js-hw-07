@@ -1,19 +1,57 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-console.log(galleryItems);
+const instance = basicLightbox.create(
+    `
+    <div class="modal">
+        <img src="" alt="orginal image"/>
+    </div>
+    `,
+    {
+        closable: true,
+    }
+);
 
 const gallery = document.querySelector(".gallery");
-console.log(gallery);
 
-createGalleryItems();
+galleryItems.forEach((element) => {
+    const item = document.createElement("div");
+    item.classList.add("gallery__item");
+    gallery.append(item);
+    const link = document.createElement("a");
+    link.classList.add("gallety__link");
+    link.href = element.original;
+    item.append(link);
+    const image = document.createElement("img");
+    image.classList.add("gallery__image");
+    image.src = element.preview;
+    image.alt = element.description;
+    image.dataset.source = element.original;
+    link.append(image);
+});
 
-function createGalleryItems() {
-   for( const item of galleryItems) {
-       const galleryElements = gallery.insertAdjacentHTML("beforeEnd", `<div class='gallery__item'><a class='gallery__link' href='${item.original}'><img class='gallery__image' src='${item.preview}' data-source='${item.original}' alt='${item.description}'>`);
-       
-        
-       
-        
+gallery.addEventListener("click", (event) => {
+    event.preventDefault();
+    const clickedElement = event.target;
+    if (clickedElement.nodeName !== "IMG") {
+        return;
     }
-}
+
+    
+    const modal = instance.element();
+    const modalImage = modal.querySelector("img");
+    modalImage.src = clickedElement.dataset.source;
+    modalImage.alt = clickedElement.alt;
+    instance.show();
+
+});
+
+
+
+
+
+
+
+
+
+
