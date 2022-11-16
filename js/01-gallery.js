@@ -19,7 +19,7 @@ galleryItems.forEach((element) => {
     item.classList.add("gallery__item");
     gallery.append(item);
     const link = document.createElement("a");
-    link.classList.add("gallety__link");
+    link.classList.add("gallery__link");
     link.href = element.original;
     item.append(link);
     const image = document.createElement("img");
