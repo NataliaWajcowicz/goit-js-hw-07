@@ -23,10 +23,9 @@ galleryItems.forEach((element) => {
     
 });
 
-let gallery = new SimpleLightbox('.gallery a');
-gallery.on('show.simpleLightbox', function () {
-    
+let gallery = new SimpleLightbox('.gallery a', {
+    captionsData: 'title', captionDelay:250,
+});
+gallery.on('show.simpleLightbox', function () {    
 });
 
-gallery.captionData('title');
-gallery.captionDelay(250);
